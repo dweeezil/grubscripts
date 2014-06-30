@@ -1,0 +1,44 @@
+installgrub.sh:
+
+	Script to perform a "grub only" installation for a "BIOS boot"
+	style disk.  The various shell variable parameters are as
+	follows:
+
+	MODULES_* - categorized lists of drivers to be built-in to the
+	grub core image.
+
+	GRUBPREFIX - prefix of the grub installation's source of
+	".mod" files.  For most stock distros, use "/usr" which will
+	cause the modules to be fetched from "/usr/lib/grub/i386-pc" or
+	"/usr/lib/grub/x86_64-efi".  For a hand-build grub installation,
+	it would typically be set to "/usr/local".
+
+	ARCH - Set to "i386" for BIOS-style installations regardless of
+	whether a 32-bit or a 64-bit x86 CPU is being used.  Set to either
+	"i386" or "x86_64" as appropriate for efi booting.
+
+	TARGET - Directory suffix from which modules are fetched.  Typical
+	settings are "pc" for BIOS booting and "efi" for UEFI booting.
+
+	The file "./load.cfg" is assumed to exist and to contain an
+	"embedded configuration".  NOTE: The script should omit the
+	"--config" option to grub-mkimage if it's not set but doesn't
+	currently do so.
+
+	Usage is:
+
+		./installgrub.sh <device> [<prefix>]
+
+		device - Device on to which grub is installed.
+		For example, "/dev/sda" for a typical first hard drive.
+
+		prefix - Optional prefix to be embedded in the core
+		image in cases where an embedded configuration is not
+		used.  For filesystems in which a GUID search is not
+		required, typical usage would be "(,msdos1)/boot/grub"
+		or "(,gpt1)/boot/grub".  The normal device specification
+		is automatically filled-in as the grub device from which
+		it it booted.  This is typical out-of-the-box behavior
+		for most standard Linux file systems.  If the prefix
+		is not specified, the embedded configuration must set
+		it appropriately.

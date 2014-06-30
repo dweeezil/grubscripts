@@ -13,6 +13,12 @@ installgrub.sh:
 	"/usr/lib/grub/x86_64-efi".  For a hand-build grub installation,
 	it would typically be set to "/usr/local".
 
+	PREFIX - working grub prefix directory; typically this is in
+	the current directory in which the script is run.  It should
+	be populated by hand as requried.  The script will, however,
+	create an appropriated target subdirectory and copy "boot.img"
+	into it.
+
 	ARCH - Set to "i386" for BIOS-style installations regardless of
 	whether a 32-bit or a 64-bit x86 CPU is being used.  Set to either
 	"i386" or "x86_64" as appropriate for efi booting.

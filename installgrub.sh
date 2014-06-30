@@ -21,8 +21,8 @@ TARGET="pc"
 
 GRUBTARGET="$ARCH-$TARGET"
 
-mkdir -p grub/"$GRUBTARGET"
-cp "$GRUBPREFIX"/lib/grub/"$GRUBTARGET"/boot.img grub/"$GRUBTARGET"
+mkdir -p "$PREFIX"/"$GRUBTARGET"
+cp "$GRUBPREFIX"/lib/grub/"$GRUBTARGET"/boot.img "$PREFIX"/"$GRUBTARGET"
 
 grub-mkimage \
 	$VERBOSE \

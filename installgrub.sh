@@ -7,11 +7,11 @@ DEV="$1"
 [ "$2" ] && IMAGEPREFIX="--prefix $2"
 
 
-MODULES_DISKIO="biosdisk"
+MODULES_DISKIO="biosdisk ahci"
 MODULES_LABEL="part_bsd part_gpt part_msdos part_sun"
-MODULES_FS="ext2 zfs"
+MODULES_FS="ext2 zfs fat exfat"
 MODULES_TERMINAL="terminal serial"
-MODULES_MISC="zfsinfo search_fs_uuid"
+MODULES_MISC="zfsinfo search_fs_uuid search_label"
 
 
 # ARCH="x86_64"
@@ -37,6 +37,13 @@ grub-mkimage \
 	$MODULES_FS \
 	$MODULES_TERMINAL \
 	$MODULES_MISC
+
+if [ $? -ne 0 ]; then
+	echo grub-mkimage failed
+	echo removing: "$PREFIX/$GRUBTARGET/core.img" 
+	rm -f "$PREFIX/$GRUBTARGET/core.img" 
+	exit 1
+fi
 
 grub-bios-setup \
 	$VERBOSE \

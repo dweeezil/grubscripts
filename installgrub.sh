@@ -1,13 +1,14 @@
 #!/bin/sh
 
 VERBOSE="--verbose"
-GRUBPREFIX="/usr"
+GRUBPREFIX="/usr/local"
 PREFIX="grub"
 DEV="$1"
 [ "$2" ] && IMAGEPREFIX="--prefix $2"
 
 
-MODULES_DISKIO="biosdisk ahci"
+MODULES_DISKIO="biosdisk"
+#MODULES_DISKIO="ahci"
 MODULES_LABEL="part_bsd part_gpt part_msdos part_sun"
 MODULES_FS="ext2 zfs fat exfat"
 MODULES_TERMINAL="terminal serial"

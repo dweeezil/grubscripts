@@ -1,0 +1,2 @@
+search.fs_uuid 6f85a729068be0d9 root ahci1,gpt4 ahci2,gpt4
+set prefix=($root)/zfsroot@/boot/grub
